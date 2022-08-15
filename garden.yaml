@@ -60,23 +60,9 @@ sensor:
     unit_of_measurement: "%"
     accuracy_decimals: 0
     internal: true
-    
-  - platform: template
-    name: "Pump 2 Power (saved)"
-    id: pump2_power_sensor
-    lambda: 'return id(pump2_power);'
-    update_interval: 60s
-    unit_of_measurement: "%"
-    accuracy_decimals: 0
-    internal: true
 
-  
 globals:
   - id: pump1_power
-    type: float
-    restore_value: yes
-     
-  - id: pump2_power
     type: float
     restore_value: yes
 
@@ -95,21 +81,6 @@ number:
     set_action:
       then:
         - lambda:  id(pump1_power) = x;
-
-  - platform: template
-    name: "Pump 2 power"
-    id: "pump2_power_slider"
-    step: 1
-    min_value: 5
-    max_value: 50
-    mode: slider
-    optimistic: yes
-    unit_of_measurement: '%'
-    icon: "mdi:water"
-    restore_value: yes
-    set_action:
-      then:
-        - lambda:  id(pump2_power) = x;
         
 output:
   - platform: esp8266_pwm
